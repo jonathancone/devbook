@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Card, CardHeader, CardBody, CardText } from 'reactstrap';
+import { Card, CardHeader, CardBody, CardText, InputGroup } from 'reactstrap';
+import { FaEdit } from 'react-icons/lib/fa';
 
 
 class EditorTextArea extends Component {
@@ -8,21 +9,26 @@ class EditorTextArea extends Component {
         return (
             <Card>
                 <CardHeader>
-                    <input type="text" value={this.props.document.title} onChange={this.props.onDocumentTitleChange} />
+                    <InputGroup>
+                        <input type="text" class="form-control" value={this.props.document.title} onChange={this.props.onDocumentTitleChange} />
+                    </InputGroup>
                 </CardHeader>
                 <CardBody>
-                    <CardText>
-                        {
+                    <div>
+                        
+                    {
                             this.props.htmlMode ?
-                                <span>
+                                <div>
                                     {this.props.document.html}
-                                </span>
+                                </div>
                                 :
-                                <span>
+                                <div>
                                     {this.props.document.markdown}
-                                </span>
+                                </div>
                         }
-                    </CardText>
+                    </div>
+
+                 
                 </CardBody>
             </Card>
         );

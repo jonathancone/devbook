@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Contents from './Contents';
 import Editor from './Editor';
+import Document from './Document';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -9,12 +10,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      documents: [{
-        key: 0,
-        title: "No Title",
-        html: "",
-        markdown: ""
-      }],
+      documents: [new Document()],
       index: 0
     }
   }
@@ -22,12 +18,7 @@ export default class App extends Component {
   handleAddDocument = () => {
     const documents = this.state.documents.slice();
 
-    documents.push({
-      key: documents.length + 1,
-      title: "No Title",
-      html: "",
-      markdown: ""
-    });
+    documents.push(new Document(documents.length + 1));
 
     this.setState({ ...this.state, documents: documents });
 
