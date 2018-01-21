@@ -14,7 +14,7 @@ export default class Editor extends Component {
     }
 
     handleHtmlModeChange = (htmlMode) => {
-        this.setState(Object.assign({}, this.state, { htmlMode: htmlMode }));
+        this.setState({ ...this.state, htmlMode: htmlMode });
     }
 
     render() {
@@ -35,7 +35,10 @@ export default class Editor extends Component {
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <EditorTextArea htmlMode={this.state.htmlMode} />
+                        <EditorTextArea
+                            htmlMode={this.state.htmlMode}
+                            document={this.props.document}
+                            onDocumentTitleChange={this.props.onDocumentTitleChange} />
                     </div>
                 </div>
             </div>

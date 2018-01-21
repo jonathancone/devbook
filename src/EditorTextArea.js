@@ -8,21 +8,19 @@ class EditorTextArea extends Component {
         return (
             <Card>
                 <CardHeader>
-                    <div>
-                        Click to add title
-                    </div>
+                    <input type="text" value={this.props.document.title} onChange={this.props.onDocumentTitleChange} />
                 </CardHeader>
                 <CardBody>
                     <CardText>
                         {
                             this.props.htmlMode ?
-                                <div>
-                                    HTML Content
-                                </div>
+                                <span>
+                                    {this.props.document.html}
+                                </span>
                                 :
-                                <div>
-                                    Markdown Content
-                                </div>
+                                <span>
+                                    {this.props.document.markdown}
+                                </span>
                         }
                     </CardText>
                 </CardBody>
