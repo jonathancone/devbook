@@ -38,7 +38,8 @@ export default class Editor extends Component {
                         <EditorTextArea
                             htmlMode={this.state.htmlMode}
                             document={this.props.document}
-                            onDocumentTitleChange={this.props.onDocumentTitleChange} />
+                            onDocumentTitleChange={this.props.onDocumentTitleChange} 
+                            onDocumentHtmlInput={this.props.onDocumentHtmlInput}/>
                     </div>
                 </div>
             </div>

@@ -15,13 +15,14 @@ export default class App extends Component {
     }
   }
 
-  handleAddDocument = () => {
-    const documents = this.state.documents.slice();
+  getCurrentDocument() {
+    return this.state.documents[this.state.index];
+  }
 
-    documents.push(new Document(documents.length + 1));
+  handleAddDocument = () => {
+    const documents = this.state.documents.concat(new Document(this.state.documents.length + 1));
 
     this.setState({ ...this.state, documents: documents });
-
   }
 
   handleSelectDocument = (index) => {
@@ -35,6 +36,16 @@ export default class App extends Component {
     documents[this.state.index].title = event.target.value;
 
     this.setState({ ...this.state, documents: documents });
+  }
+
+  handleDocumentHtmlInput = (event) => {
+    const input = event.target;
+    const html = input.innerHTML;
+    const newState = { ...this.state };
+
+    newState.documents[newState.index].html = html;
+
+    this.setState(newState);
   }
 
   render() {
@@ -56,6 +67,7 @@ export default class App extends Component {
           <main class="col-8">
             <Editor document={this.state.documents[this.state.index]}
               onDocumentTitleChange={this.handleDocumentTitleChange}
+              onDocumentHtmlInput={this.handleDocumentHtmlInput}
             />
           </main>
         </div>

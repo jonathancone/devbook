@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Card, CardHeader, CardBody, CardText, InputGroup } from 'reactstrap';
-import { FaEdit } from 'react-icons/lib/fa';
-
+import React, { Component } from 'react';
+import { Card, CardHeader, CardBody, InputGroup } from 'reactstrap';
+import RichEditor from './RichEditor';
 
 class EditorTextArea extends Component {
     render() {
@@ -15,12 +14,11 @@ class EditorTextArea extends Component {
                 </CardHeader>
                 <CardBody>
                     <div>
-                        
-                    {
+
+                        {
                             this.props.htmlMode ?
-                                <div>
-                                    {this.props.document.html}
-                                </div>
+                                <RichEditor document={this.props.document}
+                                    onDocumentInput={this.props.onDocumentHtmlInput} />
                                 :
                                 <div>
                                     {this.props.document.markdown}
@@ -28,7 +26,7 @@ class EditorTextArea extends Component {
                         }
                     </div>
 
-                 
+
                 </CardBody>
             </Card>
         );
