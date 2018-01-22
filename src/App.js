@@ -57,7 +57,7 @@ export default class App extends Component {
           </div>
         </div>
         <div class="row">
-          <div class="col-2">
+          <div class="col-3">
             <Contents documents={this.state.documents}
               index={this.state.index}
               onAddDocument={this.handleAddDocument}

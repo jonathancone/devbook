@@ -1,8 +1,12 @@
 import React from 'react'
-import { Button, Card, CardText, CardTitle } from 'reactstrap';
-import { FaFileTextO } from 'react-icons/lib/fa';
+import { Button, Card, CardText, CardTitle, CardBody, CardSubtitle } from 'reactstrap';
+import { FaFileTextO, FaStickyNoteO } from 'react-icons/lib/fa';
 
 class Contents extends React.Component {
+
+    chopString(string, length) {
+        return string.substring(0, length) + (string.length > length ? '...' : '');
+    }
 
     render() {
         return (
@@ -25,8 +29,8 @@ class Contents extends React.Component {
                         return (
                             <div class="row mb-2" key={doc.key}>
                                 <Card inverse={index === this.props.index} color={index === this.props.index ? 'primary' : ''} body onClick={() => this.props.onSelectDocument(index)}>
-                                    <CardTitle>{doc.title}</CardTitle>
-                                    <CardText>{doc.body}</CardText>
+                                    <CardSubtitle><FaStickyNoteO />{' '}{this.chopString(doc.title, 25)}</CardSubtitle>
+                                    <CardText className="small pt-2">{this.chopString(doc.html, 75)}</CardText>
                                 </Card>
                             </div>
                         );
