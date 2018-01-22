@@ -7,12 +7,18 @@ export default class RichEditor extends React.Component {
     }
 
     componentDidMount() {
-        this.inputElement.innerHTML = this.props.document.html;
+        this.updateHtml();
     }
 
     componentDidUpdate() {
-        this.inputElement.innerHTML = this.props.document.html;
-        this.moveCaret(false);
+        this.updateHtml();
+    }
+
+    updateHtml() {
+        if (this.inputElement.innerHTML !== this.props.document.html) {
+            this.inputElement.innerHTML = this.props.document.html;
+            this.moveCaret(false);
+        }
     }
 
     moveCaret(start) {
