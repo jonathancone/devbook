@@ -44,11 +44,23 @@ export default class App extends Component {
   }
 
   handleDocumentHtmlInput = (event) => {
-    const input = event.target;
-    const html = input.innerHTML;
-    const newState = { ...this.state };
 
-    newState.documents[newState.index].html = html;
+    event.stopPropagation();
+
+    let newState = this.state;
+
+    if (event.type !== 'click') {
+      const input = event.target;
+      const html = input.innerHTML;
+
+
+      if (html !== this.getCurrentDocument().html) {
+        let newState = { ...this.state };
+
+        newState.documents[newState.index].html = html;
+      }
+
+    }
 
     const finalState = this.handleCommandStateUpdate(newState);
 
@@ -57,12 +69,14 @@ export default class App extends Component {
   }
 
   handleCommandStateUpdate(proposedState) {
-    const newCommandState = { ...this.state.commandState };
+    const newCommandState = { ...proposedState.commandState };
 
-    Object.keys(proposedState)
-      .forEach(cmd => newCommandState[cmd] = document.queryCommandState(cmd))
+    Object.keys(proposedState.commandState)
+      .forEach(cmd => {
+        newCommandState[cmd] = document.queryCommandState(cmd);
+      })
 
-    if (newCommandState !== proposedState) {
+    if (newCommandState !== proposedState.commandState) {
       return { ...this.state, commandState: newCommandState };
     }
 

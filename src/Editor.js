@@ -24,7 +24,7 @@ export default class Editor extends Component {
                     <div class="col-10">
                         <EditorModeToolbar
                             htmlMode={this.state.htmlMode}
-                            commmandState={this.props.commandState}
+                            commandState={this.props.commandState}
                             onDocumentCommand={this.props.onDocumentCommand} />
                     </div>
                     <div class="col-2">

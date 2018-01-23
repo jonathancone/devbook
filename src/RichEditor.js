@@ -36,6 +36,9 @@ export default class RichEditor extends React.Component {
             <div contentEditable
                 ref={input => this.setInputElement(input)}
                 onInput={this.props.onDocumentInput}
+                onFocus={this.props.onDocumentInput}
+                onKeyUp={this.props.onDocumentInput}
+                onClick={this.props.onDocumentInput}
                 style={{ height: '50vh' }} />
         );
     }
