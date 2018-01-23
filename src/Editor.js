@@ -22,7 +22,10 @@ export default class Editor extends Component {
             <div class="container">
                 <div class="row">
                     <div class="col-10">
-                        <EditorModeToolbar htmlMode={this.state.htmlMode} />
+                        <EditorModeToolbar
+                            htmlMode={this.state.htmlMode}
+                            commmandState={this.props.commandState}
+                            onDocumentCommand={this.props.onDocumentCommand} />
                     </div>
                     <div class="col-2">
                         <MarkupModeToolbar htmlMode={this.state.htmlMode} onHtmlModeChange={this.handleHtmlModeChange} />
@@ -38,8 +41,9 @@ export default class Editor extends Component {
                         <EditorTextArea
                             htmlMode={this.state.htmlMode}
                             document={this.props.document}
-                            onDocumentTitleChange={this.props.onDocumentTitleChange} 
-                            onDocumentHtmlInput={this.props.onDocumentHtmlInput}/>
+                            onDocumentTitleChange={this.props.onDocumentTitleChange}
+                            onDocumentHtmlInput={this.props.onDocumentHtmlInput}
+                        />
                     </div>
                 </div>
             </div>

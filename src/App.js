@@ -11,7 +11,12 @@ export default class App extends Component {
     super(props);
     this.state = {
       documents: [new Document()],
-      index: 0
+      index: 0,
+      commandState: {
+        bold: false,
+        italic: false,
+        underline: false
+      }
     }
   }
 
@@ -45,7 +50,27 @@ export default class App extends Component {
 
     newState.documents[newState.index].html = html;
 
-    this.setState(newState);
+    const finalState = this.handleCommandStateUpdate(newState);
+
+    this.setState(finalState);
+
+  }
+
+  handleCommandStateUpdate(proposedState) {
+    const newCommandState = { ...this.state.commandState };
+
+    Object.keys(proposedState)
+      .forEach(cmd => newCommandState[cmd] = document.queryCommandState(cmd))
+
+    if (newCommandState !== proposedState) {
+      return { ...this.state, commandState: newCommandState };
+    }
+
+    return proposedState;
+  }
+
+  handleDocumentCommand = (event, command) => {
+    document.execCommand(command);
   }
 
   render() {
@@ -66,8 +91,10 @@ export default class App extends Component {
           </div>
           <main class="col-8">
             <Editor document={this.state.documents[this.state.index]}
+              commandState={this.state.commandState}
               onDocumentTitleChange={this.handleDocumentTitleChange}
               onDocumentHtmlInput={this.handleDocumentHtmlInput}
+              onDocumentCommand={this.handleDocumentCommand}
             />
           </main>
         </div>

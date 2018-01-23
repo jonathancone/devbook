@@ -1,11 +1,12 @@
 import React from 'react'
-import { Button, Card, CardText, CardTitle, CardBody, CardSubtitle } from 'reactstrap';
+import { Button, Card, CardText, CardSubtitle } from 'reactstrap';
 import { FaFileTextO, FaStickyNoteO } from 'react-icons/lib/fa';
 
 class Contents extends React.Component {
 
     chopString(string, length) {
-        return string.substring(0, length) + (string.length > length ? '...' : '');
+        const clean = string.replace(/(<([^>]+)>)/ig, "").replace('&nbsp;', ' ');
+        return clean.substring(0, length) + (clean.length > length ? '...' : '');
     }
 
     render() {

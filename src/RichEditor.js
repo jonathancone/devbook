@@ -2,10 +2,6 @@ import React from 'react';
 
 export default class RichEditor extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.updateHtml();
     }
@@ -39,7 +35,8 @@ export default class RichEditor extends React.Component {
         return (
             <div contentEditable
                 ref={input => this.setInputElement(input)}
-                onInput={this.props.onDocumentInput} />
+                onInput={this.props.onDocumentInput}
+                style={{ height: '50vh' }} />
         );
     }
 }
