@@ -51,7 +51,11 @@ export default class App extends Component {
 
     if (event.type !== 'click') {
       const input = event.target;
-      const html = input.innerHTML;
+      let html = input.innerHTML;
+
+      if(html === '<br>' || html === '') {
+        html = '<div><br></div>';
+      }
 
 
       if (html !== this.getCurrentDocument().html) {

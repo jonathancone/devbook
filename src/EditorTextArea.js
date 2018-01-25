@@ -13,7 +13,7 @@ class EditorTextArea extends Component {
                     </InputGroup>
                 </CardHeader>
                 <CardBody>
-                    <div>
+                    <div style={{overflow: "overlay"}}>
 
                         {
                             this.props.htmlMode ?

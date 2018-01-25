@@ -1,4 +1,5 @@
 import React from 'react';
+import './RichEditor.css'
 
 export default class RichEditor extends React.Component {
 
@@ -33,13 +34,14 @@ export default class RichEditor extends React.Component {
 
     render() {
         return (
-            <div contentEditable
+            <div contentEditable className={'rich-editor-text-area'}
                 ref={input => this.setInputElement(input)}
                 onInput={this.props.onDocumentInput}
                 onFocus={this.props.onDocumentInput}
                 onKeyUp={this.props.onDocumentInput}
                 onClick={this.props.onDocumentInput}
-                style={{ height: '50vh' }} />
+                style={{ height: '50vh' }}>
+            </div>
         );
     }
 }

@@ -1,0 +1,12 @@
+div.rich-editor-text-area {
+    counter-reset: linenumber;
+    padding-right:5px;
+    outline: none;
+}
+div.rich-editor-text-area > div:before {
+    counter-increment: linenumber;
+    content: counter(linenumber);
+    padding-right: 2rem;
+    color: lightgray;
+    margin: 0;
+}
