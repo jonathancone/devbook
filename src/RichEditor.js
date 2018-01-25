@@ -14,13 +14,15 @@ export default class RichEditor extends React.Component {
     updateHtml() {
         if (this.inputElement.innerHTML !== this.props.document.html) {
             this.inputElement.innerHTML = this.props.document.html;
-            this.moveCaret(false);
+            this.moveCaret(this.inputElement, false);
         }
+
+        this.createBaseChildIfNeeded(this.inputElement)
     }
 
-    moveCaret(start) {
+    moveCaret(element, start) {
         const range = document.createRange();
-        range.selectNodeContents(this.inputElement);
+        range.selectNodeContents(element);
         range.collapse(start);
 
         const selection = window.getSelection();
@@ -32,14 +34,47 @@ export default class RichEditor extends React.Component {
         this.inputElement = inputElement
     }
 
+    createBaseChildIfNeeded(parent) {
+
+        if (parent.firstElementChild && parent.firstElementChild.tagName.toLowerCase() !== 'div') {
+            parent.removeChild(parent.firstChild);
+        }
+
+        if (!parent.firstChild) {
+            const div = document.createElement('div');
+            const br = document.createElement('br');
+
+            div.appendChild(br);
+            parent.appendChild(div);
+            
+            this.moveCaret(div, true);
+        }
+
+    }
+
+    handleDocumentChange = (event) => {
+        const target = event.target;
+
+        this.createBaseChildIfNeeded(target);
+
+        if (this.props.document.html !== target.innerHTML) {
+            this.props.onDocumentChange(event);
+        }
+
+    }
+
+    handleCursorChange = (event) => {
+
+    }
+
     render() {
         return (
             <div contentEditable className={'rich-editor-text-area'}
                 ref={input => this.setInputElement(input)}
-                onInput={this.props.onDocumentInput}
-                onFocus={this.props.onDocumentInput}
-                onKeyUp={this.props.onDocumentInput}
-                onClick={this.props.onDocumentInput}
+                onInput={this.handleDocumentChange}
+                onFocus={this.handleCursorChange}
+                onClick={this.handleCursorChange}
+                onKeyUp={this.handleCursorChange}
                 style={{ height: '50vh' }}>
             </div>
         );

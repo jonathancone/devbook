@@ -43,28 +43,11 @@ export default class App extends Component {
     this.setState({ ...this.state, documents: documents });
   }
 
-  handleDocumentHtmlInput = (event) => {
+  handleDocumentChange = (event) => {
 
-    event.stopPropagation();
+    let newState = { ...this.state };
 
-    let newState = this.state;
-
-    if (event.type !== 'click') {
-      const input = event.target;
-      let html = input.innerHTML;
-
-      if(html === '<br>' || html === '') {
-        html = '<div><br></div>';
-      }
-
-
-      if (html !== this.getCurrentDocument().html) {
-        let newState = { ...this.state };
-
-        newState.documents[newState.index].html = html;
-      }
-
-    }
+    newState.documents[newState.index].html = event.target.innerHTML;
 
     const finalState = this.handleCommandStateUpdate(newState);
 
@@ -111,7 +94,7 @@ export default class App extends Component {
             <Editor document={this.state.documents[this.state.index]}
               commandState={this.state.commandState}
               onDocumentTitleChange={this.handleDocumentTitleChange}
-              onDocumentHtmlInput={this.handleDocumentHtmlInput}
+              onDocumentChange={this.handleDocumentChange}
               onDocumentCommand={this.handleDocumentCommand}
             />
           </main>

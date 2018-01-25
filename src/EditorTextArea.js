@@ -18,7 +18,7 @@ class EditorTextArea extends Component {
                         {
                             this.props.htmlMode ?
                                 <RichEditor document={this.props.document}
-                                    onDocumentInput={this.props.onDocumentHtmlInput} />
+                                    onDocumentChange={this.props.onDocumentChange} />
                                 :
                                 <div>
                                     {this.props.document.markdown}

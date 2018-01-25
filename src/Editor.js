@@ -42,7 +42,7 @@ export default class Editor extends Component {
                             htmlMode={this.state.htmlMode}
                             document={this.props.document}
                             onDocumentTitleChange={this.props.onDocumentTitleChange}
-                            onDocumentHtmlInput={this.props.onDocumentHtmlInput}
+                            onDocumentChange={this.props.onDocumentChange}
                         />
                     </div>
                 </div>
