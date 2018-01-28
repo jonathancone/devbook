@@ -49,29 +49,38 @@ export default class App extends Component {
 
     newState.documents[newState.index].html = event.target.innerHTML;
 
-    const finalState = this.handleCommandStateUpdate(newState);
-
-    this.setState(finalState);
+    this.handleCommandStateUpdate(null, newState);
 
   }
 
-  handleCommandStateUpdate(proposedState) {
-    const newCommandState = { ...proposedState.commandState };
+  buildCurrentCommandState() {
+    const newCommandState = {};
 
-    Object.keys(proposedState.commandState)
+    Object.keys(this.state.commandState)
       .forEach(cmd => {
         newCommandState[cmd] = document.queryCommandState(cmd);
-      })
+      });
 
-    if (newCommandState !== proposedState.commandState) {
-      return { ...this.state, commandState: newCommandState };
-    }
-
-    return proposedState;
+    return newCommandState;
   }
 
-  handleDocumentCommand = (event, command) => {
-    document.execCommand(command);
+  handleCommandStateUpdate = (event, proposedState) => {
+
+    proposedState = proposedState || this.state;
+
+    const newCommandState = this.buildCurrentCommandState();
+
+    let finalState = proposedState;
+
+    if (newCommandState !== proposedState.commandState) {
+      finalState = { ...proposedState, commandState: newCommandState };
+    }
+
+    this.setState(finalState);
+  }
+
+  handleDocumentCommand = (event, command, value) => {
+    document.execCommand(command, false, value);
   }
 
   render() {
@@ -93,6 +102,7 @@ export default class App extends Component {
           <main class="col-8">
             <Editor document={this.state.documents[this.state.index]}
               commandState={this.state.commandState}
+              onDocumentCursorChange={this.handleCommandStateUpdate}
               onDocumentTitleChange={this.handleDocumentTitleChange}
               onDocumentChange={this.handleDocumentChange}
               onDocumentCommand={this.handleDocumentCommand}

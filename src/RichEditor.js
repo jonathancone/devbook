@@ -46,7 +46,7 @@ export default class RichEditor extends React.Component {
 
             div.appendChild(br);
             parent.appendChild(div);
-            
+
             this.moveCaret(div, true);
         }
 
@@ -63,18 +63,14 @@ export default class RichEditor extends React.Component {
 
     }
 
-    handleCursorChange = (event) => {
-
-    }
-
     render() {
         return (
             <div contentEditable className={'rich-editor-text-area'}
                 ref={input => this.setInputElement(input)}
                 onInput={this.handleDocumentChange}
-                onFocus={this.handleCursorChange}
-                onClick={this.handleCursorChange}
-                onKeyUp={this.handleCursorChange}
+                onFocus={this.props.onDocumentCursorChange}
+                onClick={this.props.onDocumentCursorChange}
+                onKeyUp={this.props.onDocumentCursorChange}
                 style={{ height: '50vh' }}>
             </div>
         );

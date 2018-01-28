@@ -13,11 +13,12 @@ class EditorTextArea extends Component {
                     </InputGroup>
                 </CardHeader>
                 <CardBody>
-                    <div style={{overflow: "overlay"}}>
+                    <div style={{ overflow: "overlay" }}>
 
                         {
                             this.props.htmlMode ?
                                 <RichEditor document={this.props.document}
+                                    onDocumentCursorChange={this.props.onDocumentCursorChange}
                                     onDocumentChange={this.props.onDocumentChange} />
                                 :
                                 <div>
@@ -25,8 +26,6 @@ class EditorTextArea extends Component {
                                 </div>
                         }
                     </div>
-
-
                 </CardBody>
             </Card>
         );
