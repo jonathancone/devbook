@@ -35,6 +35,7 @@ export default class RichEditor extends React.Component {
     }
 
     createBaseChildIfNeeded(parent) {
+        return; // Not needed for now.
 
         if (parent.firstElementChild && parent.firstElementChild.tagName.toLowerCase() !== 'div') {
             parent.removeChild(parent.firstChild);

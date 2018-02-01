@@ -1,4 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import './EditorTextArea.css';
+
 import React, { Component } from 'react';
 import { Card, CardHeader, CardBody, InputGroup } from 'reactstrap';
 import RichEditor from './RichEditor';
@@ -12,7 +14,7 @@ class EditorTextArea extends Component {
                         <input type="text" class="form-control" value={this.props.document.title} onChange={this.props.onDocumentTitleChange} />
                     </InputGroup>
                 </CardHeader>
-                <CardBody>
+                <CardBody className="editor-text-area">
                     <div style={{ overflow: "overlay" }}>
 
                         {

@@ -79,8 +79,19 @@ export default class App extends Component {
     this.setState(finalState);
   }
 
+  static commands = ['bold', 'italic', 'underline'];
+
   handleDocumentCommand = (event, command, value) => {
+
+      
+      const enabled = document.queryCommandState('formatBlock', value);
+
+    console.log(`${command}: ${value} - ${enabled}`);
+
     document.execCommand(command, false, value);
+
+
+
   }
 
   render() {
