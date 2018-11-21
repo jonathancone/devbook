@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Card, CardText, CardSubtitle } from 'reactstrap';
 import { FaFileTextO, FaStickyNoteO } from 'react-icons/lib/fa';
+import './Contents.css'
 
 class Contents extends React.Component {
 
@@ -11,13 +12,15 @@ class Contents extends React.Component {
 
     render() {
         return (
-            <div class="container">
+            <div class="container contents">
                 <div class="row justify-content-begin">
                     <div class="col-9">
-                        <h4>Documents</h4>
+                        <img src="logo.png"></img>
                     </div>
                     <div class="col-2">
-                        <Button outline onClick={() => this.props.onAddDocument()}><FaFileTextO /></Button>
+                        <div class="add-button">
+                            <Button outline onClick={() => this.props.onAddDocument()}><FaFileTextO /></Button>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

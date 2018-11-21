@@ -83,25 +83,15 @@ export default class App extends Component {
 
   handleDocumentCommand = (event, command, value) => {
 
-      
-      const enabled = document.queryCommandState('formatBlock', value);
-
-    console.log(`${command}: ${value} - ${enabled}`);
+    console.log(`${command}: ${value}`);
 
     document.execCommand(command, false, value);
-
-
 
   }
 
   render() {
     return (
       <div class="container-fluid">
-        <div class="row pb-4">
-          <div class="col">
-            <h1>Markdown Editor</h1>
-          </div>
-        </div>
         <div class="row">
           <div class="col-3">
             <Contents documents={this.state.documents}
